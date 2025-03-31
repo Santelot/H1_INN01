@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbook - Sesión 1: Taller Visiones del Futuro (Preparatoria)</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+        .header {
+            background-color: #2196F3; /* Blue accent color */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+         .header h2 {
+            margin: 5px 0 0;
+            font-size: 1.3em;
+            font-weight: normal;
+         }
+        .time-title {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .banner {
+            background-color: #2196F3; /* Blue accent color */
+            color: white;
+            padding: 12px 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .banner:hover {
+            background-color: #1976D2; /* Darker blue on hover */
+        }
+        .banner .title {
+            font-size: 1.3em;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .banner .subtitle {
+            font-size: 1em;
+            margin-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            padding-top: 8px;
+            font-weight: normal;
+        }
+        .content {
+            display: none;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            border-radius: 0 0 5px 5px;
+            background-color: #f9f9f9;
+        }
+        .step-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .dialogue {
+            background-color: #e3f2fd; /* Light blue background for dialogue */
+            border: 1px solid #bbdefb; /* Lighter blue border */
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            text-align: left; /* Adjusted alignment */
+            font-style: normal; /* Removed italics for main dialogue */
+            position: relative;
+        }
+        .dialogue::before { /* Optional: Add a small quote icon or similar */
+            /* content: '💬'; */
+            /* position: absolute; */
+            /* left: 10px; */
+            /* top: 10px; */
+            /* font-size: 1.2em; */
+        }
+        .dialogue i { /* Style for instructions within dialogue */
+           display: block;
+           margin-top: 8px;
+           color: #555;
+           font-style: italic;
+        }
+        .dropdown {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .dropdown select {
+            font-size: 1em;
+            padding: 8px 12px;
+            margin-left: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            text-align: left;
+        }
+         td:first-child {
+            font-weight: bold;
+             width: 40%; /* Adjust width as needed */
+         }
+        ul, ol {
+            margin-left: 20px;
+            padding-left: 15px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        strong {
+             color: #1976D2; /* Darker blue for emphasis */
+        }
+        code {
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+    <script>
+        function updateActivities() {
+            var selectedTime = document.getElementById('time-select').value;
+            var activities = document.getElementsByClassName('activity');
+
+            document.getElementById('selected-time').innerText = "Tiempo efectivo de clase: " + selectedTime + " minutos";
+
+            // Since the base time for this session IS 40 minutes, we show all activities for 40min.
+            // No complex hiding logic needed for this specific session.
+            for (var i = 0; i < activities.length; i++) {
+                activities[i].style.display = 'block';
+            }
+        }
+
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+
+        // Ensure activities are shown correctly on initial load based on default dropdown value
+        document.addEventListener('DOMContentLoaded', function() {
+            updateActivities(); // Call once on load
+             // Set default display to none for all content sections
+             var contents = document.querySelectorAll('.content');
+             contents.forEach(function(content) {
+                 content.style.display = 'none';
+             });
+        });
+    </script>
+</head>
+<body>
+
+<div class="header">
+    <h1>Playbook - Taller: Visiones del Futuro: Diseñando con IA Generativa (1º de Preparatoria)</h1>
+    <h2>Sesión 1: Preparación y Exploración Inicial</h2>
+</div>
+
+<div class="container">
+    <div class="dropdown">
+        <label for="time-select">Tiempo efectivo de Clase:</label>
+        <select id="time-select" onchange="updateActivities()">
+            <option value="40" selected>40 minutos</option>
+            <!-- No other time options needed as per the PDF for this session -->
+        </select>
+    </div>
+
+    <h2 id="selected-time" class="time-title">Tiempo efectivo de clase: 40 minutos</h2>
+
+<!-- ------------------------------------------------- Espacio para De un Vistazo --------------------------------------------------------- -->
+<div id="activity-0" class="activity">
+    <div class="banner" onclick="toggleContent('de_un_vistazo')">
+        <div class="title">🎯 De un Vistazo y Preparación Previa 📋</div>
+        <div class="subtitle">Resumen rápido de la sesión y lo que necesitas preparar.</div>
+    </div>
+    <div id="de_un_vistazo" class="content">
+        <table>
+            <tr>
+                <td>
+                    <strong>Objetivos:</strong>
+                    <ul>
+                        <li>Presentar el taller, la receta "Visiones del Futuro" y su enfoque en IA Generativa/Automatización.</li>
+                        <li>Formar equipos colaborativos.</li>
+                        <li>Establecer el "Código del Innovador".</li>
+                        <li>Presentar los ODS como marco para la innovación.</li>
+                        <li>Recapitular lo aprendido del curso de I.A.</li>
+                        <li>Táctica 1: Iniciar la creación de un Combinaboard por equipo en Miro, enfocándose en ODS, tendencias tecnológicas (IA/Auto) y prompts iniciales.</li>
+                    </ul>
+                    <strong>Tácticas Principales:</strong> Combinaboard (Parte 1: Creación Inicial).<br><br>
+                    <strong>Entregable Clave:</strong> Equipos formados, ODS elegido por equipo, Combinaboard inicial en Miro con imágenes, palabras clave, tendencias IA/Auto y prompts.
+                </td>
+                <td>
+                    <strong>Materiales Específicos:</strong>
+                    <ul>
+                        <li>Proyector/Pantalla, Computadora, Internet.</li>
+                        <li>Acceso a Miro (plantillas preparadas).</li>
+                        <li>Presentación de diapositivas (Láminas 1-8).</li>
+                        <li>Lista/Imágenes de ODS.</li>
+                        <li>Ejemplos de herramientas IA Generativa.</li>
+                    </ul>
+                     <strong>Preparación Previa para ESTA Sesión:</strong>
+                    <ol>
+                        <li><strong>Presentación Lista:</strong> Tener listas las Diapositivas 1 a 8. Preparar ejemplos claros de IA Generativa/Automatización y prompts relacionados con ODS.</li>
+                        <li><strong>Tablero Miro:</strong> Crear un tablero con una plantilla para cada equipo (Nombre Equipo, ODS Elegido, Espacio Combinaboard). Asegurarse de que los estudiantes sepan acceder/usar Miro.</li>
+                        <li><strong>Código Innovador:</strong> Versión Preparatoria lista.</li>
+                        <li><strong>ODS:</strong> Diapositiva con iconos lista.</li>
+                    </ol>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- ------------------------------------------------- Espacio para Actividades --------------------------------------------------------- -->
+
+<!-- Actividad 1 -->
+<div id="activity-1" class="activity">
+    <div class="banner" onclick="toggleContent('bienvenida_intro')">
+        <div class="title">🚀 Actividad 1: Bienvenida e Introducción a la Receta ⏰ Tiempo: 3 minutos</div>
+        <div class="subtitle">Introducir el taller, la "Receta" de innovación y motivar a los estudiantes hacia el futuro con IA.</div>
+    </div>
+    <div id="bienvenida_intro" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1.5 minutos):</strong> Proyectar Diapositiva 1.</td>
+                <td class="dialogue">
+                    "¡Bienvenidos, creadores del mañana! Hoy iniciamos 'Visiones del Futuro', un taller donde usaremos nuestra creatividad y herramientas súper poderosas como la Inteligencia Artificial Generativa para diseñar soluciones a problemas reales. 🚀🤖 ¡Prepárense para usar su imaginación y la IA para crear soluciones a los grandes retos del planeta! Este es un espacio para pensar en grande, para visualizar futuros posibles y para empezar a construirlos con tecnología."
+                </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 2 (1.5 minutos):</strong> Proyectar Diapositiva 2.</td>
+                <td class="dialogue">
+                     "Nuestra guía será la receta <strong>'Visiones del Futuro'</strong>. ¡Estos son los pasos que seguiremos! Piensen en esto como nuestro mapa del tesoro hacia ideas innovadoras. Cada paso es un ingrediente clave para cocinar un futuro mejor:"
+                     <ul>
+                         <li><strong>1. Combinaboard:</strong> ¡Creamos nuestro universo visual de inspiración futura! (🎨+💡+❓)</li>
+                         <li><strong>2. Mash-Up:</strong> ¡Mezclamos ideas locas para inventar soluciones inesperadas con IA! (🧪+💥+🤖)</li>
+                         <li><strong>3. Human Truths:</strong> ¡Conectamos nuestras ideas futuristas con lo que nos hace humanos! (❤️+🧑‍🤝‍🧑)</li>
+                         <li><strong>4. T-Bar:</strong> ¡Damos forma y detalle a nuestra visión del futuro en un plan claro! (📊+✍️+🎯)</li>
+                         <li><strong>5. Big Beats:</strong> ¡Contamos la historia ÉPICA del impacto transformador de nuestra idea! (🌍+📈+✨)</li>
+                         <li><strong>6. Prototipado Conceptual (IA):</strong> ¡Planeamos cómo usar la IA para MOSTRAR nuestra idea sin construirla! (💻+🖼️+🤯)</li>
+                         <li><strong>7. Like, Wish, Wonder (Cierre):</strong> ¡Compartimos nuestras visiones y las enriquecemos con feedback! (👍+🌠+🤔)</li>
+                     </ul>
+                     "¡Estos 7 pasos nos guiarán para explorar, crear y definir visiones impactantes! ¡Vamos a recorrerlos juntos!"
+                      <i>(Leer cada paso brevemente o pedir a estudiantes voluntarios que los lean, enfatizando la emoción y el propósito).</i>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 2 -->
+<div id="activity-2" class="activity">
+    <div class="banner" onclick="toggleContent('formacion_equipos')">
+        <div class="title">🤝 Actividad 2: Formación de Equipos ⏰ Tiempo: 3 minutos</div>
+        <div class="subtitle">Organizar a los estudiantes en equipos colaborativos para el taller.</div>
+    </div>
+    <div id="formacion_equipos" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1 minuto):</strong> Dar instrucciones para formar equipos.</td>
+                <td class="dialogue">
+                    "¡Hora de formar equipos! El equipo que elijan será con el que trabajarán durante todo el taller y después para crear su prototipo final. Busquen a 2 o 3 compañeros con quienes sientan que pueden colaborar, idear y construir visiones del futuro. ¡Formen sus 'Escuadrones de Innovación'!"
+                    <i>(Especificar el tamaño del equipo, usualmente 3-4 personas. Permitir que se organicen, guiando si es necesario).</i>
+                </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 2 (1.5 minutos):</strong> Tiempo para formar equipos.</td>
+                <td class="dialogue">
+                    "Tienen minuto y medio para encontrar a su equipo. Una vez juntos, preséntense brevemente si no se conocen bien y prepárense para la siguiente etapa."
+                     <i>(Circular para facilitar la formación de equipos, asegurar que nadie quede solo).</i>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 3 (0.5 minutos):</strong> Confirmar equipos formados.</td>
+                <td class="dialogue">
+                    "¿Listos los 'Escuadrones de Innovación'? ¡Excelente! Ahora, presenten a su 'Equipo del Futuro'. Digan sus nombres rápidamente para que todos los conozcamos."
+                    <i>(Pedir a un par de equipos que digan los nombres de sus integrantes como ejemplo).</i>
+                    "¡Perfecto! ¡Estos equipos están listos para diseñar el futuro!"
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 3 -->
+<div id="activity-3" class="activity">
+    <div class="banner" onclick="toggleContent('codigo_innovador')">
+        <div class="title">📜 Actividad 3: Código del Innovador ⏰ Tiempo: 5 minutos</div>
+        <div class="subtitle">Establecer las normas de colaboración, creatividad y ética para el taller.</div>
+    </div>
+    <div id="codigo_innovador" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1 minuto):</strong> Introducir el Código. Proyectar Diapositiva 3.</td>
+                <td class="dialogue">
+                     "Antes de sumergirnos en la creación, necesitamos establecer nuestro <strong>'Código del Innovador'</strong>. Estas son nuestras reglas de oro, los principios que guiarán nuestro trabajo en equipo y nuestra exploración creativa. Somos un equipo de exploradores, inventores y creadores. Aquí, las ideas se potencian, los errores son 'bugs' que convertimos en 'features', y juntos generamos un impacto positivo en el mundo."
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 2 (3 minutos):</strong> Leer y discutir el Código (Versión Preparatoria).</td>
+                 <td class="dialogue">
+                    "Recordemos nuestro 'Código del Innovador'. Leamos un punto cada uno (o por equipos) y comentemos brevemente: ¿Cómo aplica esto al diseñar el futuro con IA?"
+                    <ul>
+                        <li><strong>1. ¡Soñamos en Grande: Apuntamos a la Luna!</strong> Nos atrevemos a tener ideas disruptivas, que desafíen lo establecido. ¡Aquí no hay ideas imposibles, solo desafíos que nos impulsan a innovar! <i>(Pregunta: ¿Qué idea 'imposible' con IA les gustaría explorar?)</i></li>
+                        <li><strong>2. Respetamos y Construimos:</strong> Escuchamos con apertura, valoramos la diversidad de ideas y decimos: "¡SÍ, Y ADEMÁS...!" para co-crear soluciones innovadoras y de alto impacto. <i>(Pregunta: ¿Cómo podemos asegurar que todas las voces del equipo sean escuchadas al idear con IA?)</i></li>
+                        <li><strong>3. Somos Empáticos:</strong> Nos ponemos en los zapatos de los demás, practicamos la escucha activa y la comprensión profunda, para identificar necesidades reales y co-crear soluciones con un enfoque humano. <i>(Pregunta: ¿Por qué es crucial la empatía al diseñar soluciones con IA para problemas globales?)</i></li>
+                        <li><strong>4. Somos un Equipo Inclusivo:</strong> Fomentamos una cultura de respeto, colaboración y equidad, donde cada voz es valorada, cada perspectiva es considerada y cada miembro se siente empoderado. <i>(Pregunta: ¿Cómo la IA puede ayudar o dificultar la inclusión?)</i></li>
+                        <li><strong>5. Aprendemos de los "Bugs":</strong> Vemos los errores como oportunidades de crecimiento y los transformamos en "features" que optimizan nuestras soluciones. ¡Iteramos y perfeccionamos! <i>(Pregunta: ¿Qué 'bug' o limitación actual de la IA podríamos convertir en una 'feature' futura?)</i></li>
+                        <li><strong>6. Somos Innovadores para el Bien:</strong> Usamos nuestra creatividad y pensamiento crítico para generar soluciones sostenibles y escalables que aborden desafíos sociales, ambientales y económicos, generando un impacto positivo y duradero. <i>(Pregunta: ¿Qué responsabilidad ética tenemos al usar IA para generar impacto?)</i></li>
+                        <li><strong>7. ¡Compartimos para Inspirar!</strong> Difundimos nuestro aprendizaje y resultados para crear un ecosistema de innovación colaborativo, inspirar a otros y amplificar el impacto. <i>(Pregunta: ¿Cómo podemos compartir nuestras 'visiones del futuro' para inspirar a otros?)</i></li>
+                    </ul>
+                     <i>(Dinamizar la lectura y facilitar una breve discusión de cada punto, conectándolo con el uso de IA y el propósito del taller).</i>
+                 </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 3 (1 minuto):</strong> Reforzar el compromiso.</td>
+                <td class="dialogue">
+                    "¿Nos comprometemos a seguir este Código del Innovador durante nuestro viaje? ¡Genial! Este será nuestro pacto para crear un espacio seguro, respetuoso y súper creativo. ¡Adelante, innovadores!"
+                 </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 4 -->
+<div id="activity-4" class="activity">
+    <div class="banner" onclick="toggleContent('intro_ods')">
+        <div class="title">🌍 Actividad 4: Introducción a los ODS y Elección ⏰ Tiempo: 7 minutos</div>
+        <div class="subtitle">Presentar los Objetivos de Desarrollo Sostenible (ODS) como marco y que los equipos elijan su enfoque.</div>
+    </div>
+    <div id="intro_ods" class="content">
+        <table>
+            <tr>
+                 <td><strong>PASO 1 (1.5 minutos):</strong> Presentar los ODS. Proyectar Diapositiva 4.</td>
+                <td class="dialogue">
+                     "Para enfocar nuestras 'Visiones del Futuro', vamos a usar un marco global muy importante: los <strong>Objetivos de Desarrollo Sostenible (ODS)</strong>. Estos son 17 grandes retos que el mundo se ha propuesto resolver para 2030. Piensen en ellos como <strong>oportunidades para innovar</strong>, como las misiones más importantes de nuestro tiempo."
+                     <br><br>
+                     <i>(Mostrar la Diapositiva 4 con los iconos de los 17 ODS. Explicar brevemente qué son: un llamado universal a la acción para poner fin a la pobreza, proteger el planeta y mejorar las vidas y las perspectivas de las personas en todo el mundo. Mencionar algunos ejemplos diversos como Salud y Bienestar, Educación de Calidad, Agua Limpia, Acción por el Clima, Ciudades Sostenibles, etc.).</i>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 2 (1.5 minutos):</strong> Conectar ODS con IA/Automatización.</td>
+                <td class="dialogue">
+                    "Ahora, la pregunta clave: ¿Qué problemas relacionados con estos ODS ven en su entorno o en el mundo? Y más importante aún, ¿cómo creen que la <strong>Inteligencia Artificial Generativa</strong> o la <strong>automatización</strong> podrían ser parte de la solución? ¿Podría una IA ayudar a diseñar mejores sistemas educativos (ODS 4)? ¿O a optimizar el uso de energía (ODS 7 y 13)? ¿O a crear campañas de concientización más efectivas (varios ODS)?"
+                    <i>(Plantear estas preguntas para estimular la reflexión).</i>
+                </td>
+            </tr>
+             <tr>
+                 <td><strong>PASO 3 (3 minutos):</strong> Elección del ODS por equipo.</td>
+                 <td class="dialogue">
+                    "En sus equipos, discutan: ¿Qué ODS resuena más con ustedes? ¿Qué desafío específico dentro de ese ODS les gustaría abordar con su visión del futuro? Elijan <strong>UN ODS</strong> en el que quieran enfocar su proyecto durante este taller. Piensen en problemas que les importen de verdad."
+                    <br><br>
+                    <i>(Dar tiempo para que los equipos discutan y elijan. Circular para escuchar y apoyar, ayudándoles a concretar si es necesario).</i>
+                 </td>
+            </tr>
+             <tr>
+                 <td><strong>PASO 4 (1 minuto):</strong> Anunciar elecciones.</td>
+                 <td class="dialogue">
+                    "¡Tiempo! Cada equipo, por favor, comparta rápidamente el ODS que ha elegido como su misión para este taller. ¡Vamos a escuchar sus enfoques!"
+                    <i>(Cada equipo anuncia su ODS elegido. Tomar nota mental o física de las elecciones).</i>
+                    "¡Fantástico! Ya tenemos nuestras misiones ODS definidas. Ahora vamos a conectar esto con las herramientas de IA que ya conocen."
+                    <br><br>
+                    <i>(Entregable Parcial: ODS elegido por cada equipo).</i>
+                 </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 5 -->
+<div id="activity-5" class="activity">
+    <div class="banner" onclick="toggleContent('framing_tecnologico')">
+        <div class="title">💡 Actividad 5: Framing Tecnológico: ¡Sus Superpoderes de Prompting e IA! ⏰ Tiempo: 5 minutos</div>
+        <div class="subtitle">Recapitular conocimientos previos sobre IA Generativa y Prompting, conectándolos al taller.</div>
+    </div>
+    <div id="framing_tecnologico" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1.5 minutos):</strong> Recordar herramientas IA usadas. Proyectar Diapositiva 5 (Revisada).</td>
+                <td class="dialogue">
+                    "¡Creadores del mañana! Este año se han sumergido en el fascinante mundo de la <strong>Inteligencia Artificial Generativa</strong>. ¡Han descubierto herramientas increíbles!"
+                    <br><br>
+                    "¿Recuerdan cuando exploramos <strong>ChatGPT</strong> y vimos cómo puede escribir historias, poemas o incluso código? ¿O cuando experimentaron con <i>[Mencionar herramienta de imagen que usaron, ej: Midjourney, DALL-E, Stable Diffusion]</i> y convirtieron palabras en imágenes asombrosas?"
+                     <i>(Mostrar iconos/logos de las herramientas IA que hayan utilizado. Adaptar la mención a las herramientas específicas que el grupo conozca).</i>
+                </td>
+            </tr>
+            <tr>
+                 <td><strong>PASO 2 (1.5 minutos):</strong> Enfatizar la Ingeniería de Prompts.</td>
+                <td class="dialogue">
+                    "¡Pero lo más importante! Aprendieron el secreto para hablar con estas IAs: la <strong>Ingeniería de Prompts</strong>. Saben que un buen prompt, claro y detallado, es como darle a la IA el mapa correcto para que llegue al tesoro que buscan. Han practicado cómo dar <strong>contexto</strong>, definir el <strong>formato</strong> deseado, ¡incluso pedirle a la IA que actúe con una <strong>persona</strong> específica!"
+                     <br><br>
+                     "También hablamos de <strong>Automatización</strong>, de cómo las máquinas pueden hacer tareas repetitivas para liberarnos tiempo y energía."
+                     <i>(Mostrar icono de "Prompt" y de engranajes/automatización. Resaltar las palabras clave en negrita).</i>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 3 (1 minuto):</strong> Conectar IA/Prompting con el Taller y ODS. Proyectar Diapositiva 5.1.</td>
+                <td class="dialogue">
+                    "¡ESOS son sus súper poderes para este taller! Vamos a usar su habilidad para crear <strong>prompts efectivos</strong> y su conocimiento de las <strong>herramientas de IA Generativa y automatización</strong> como las chispas para diseñar nuestras 'Visiones del Futuro'. ¡La IA será su co-piloto creativo en esta misión ODS!"
+                    <br><br>
+                    "Este año no solo aprendieron a usar herramientas de IA, también descubrieron cómo hacerlas pensar con ustedes. Y ahora... ¡vamos a usarlas para resolver retos del mundo real! ¿Se imaginan un tutor digital que enseñe matemáticas a niños sin acceso a clases (ODS 4)? ¿O un asistente que detecte fake news (ODS 16)? ¿O un chatbot que te motive a comer más sano (ODS 3)?"
+                    <i>(Mostrar ejemplos visuales en Diapositiva 5.1: IA+ODS = Proyectos con Propósito, usando ejemplos como Tutor GPT con tortillas para ODS 4, Chatbot de hábitos para ODS 3, Detector de sesgos para ODS 5, Detector fake news ODS 16, Ayudante de lunch sin desperdicio ODS 12).</i>
+                 </td>
+            </tr>
+             <tr>
+                 <td><strong>PASO 4 (1 minuto):</strong> Misión y Llamada a la Acción.</td>
+                 <td class="dialogue">
+                     "Con sus súper poderes de prompting, pueden hacer que la IA actúe como un profe paciente, un activista social, un nutriólogo, o un planificador de eventos sostenibles."
+                     <br><br>
+                     "Hoy van a elegir un problema del mundo que les importe, un ODS que les mueva el corazón... y con sus conocimientos de IA, ¡van a crear algo que podría existir mañana! Su misión: imaginar, prototipar y presentar una solución con IA que haga del mundo un lugar más justo, sano, educado o sostenible. ¡Vamos a darle poder a su imaginación con propósito! ¡Prepárense para poner en práctica todo ese ingenio de prompting!"
+                 </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 6 -->
+<div id="activity-6" class="activity">
+    <div class="banner" onclick="toggleContent('combinaboard_inicial')">
+        <div class="title">🧩 Actividad 6: Táctica 1: Combinaboard en Miro (Parte 1) ⏰ Tiempo: 15 minutos</div>
+        <div class="subtitle">Iniciar la creación colaborativa del tablero de inspiración visual y conceptual en Miro.</div>
+    </div>
+    <div id="combinaboard_inicial" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1 minuto):</strong> Introducir Táctica 1 y Miro. Proyectar Diapositiva 6.</td>
+                <td class="dialogue">
+                    "¡Manos a la obra! Empezamos con la Táctica 1 de nuestra receta: crear nuestro <strong>Combinaboard</strong> en Miro. Este será nuestro espacio de inspiración compartido, nuestro 'mood board' digital para explorar el futuro de nuestro ODS."
+                    <br><br>
+                    "Cada equipo tiene su espacio preparado en el tablero de Miro. Asegúrense de que todos puedan acceder."
+                    <i>(Verificar que todos los equipos tengan acceso a su sección en Miro).</i>
+                </td>
+            </tr>
+            <tr>
+                 <td><strong>PASO 2 (2 minutos):</strong> Dar instrucciones detalladas. Proyectar Diapositiva 7 (Opcional, como apoyo visual del Combinaboard).</td>
+                 <td class="dialogue">
+                    "Durante los próximos 15 minutos, busquen y añadan en equipo los siguientes elementos a su Combinaboard en Miro:"
+                    <ul>
+                        <li><strong>Imágenes y Palabras sobre su ODS:</strong> Busquen fotos, gráficos, ilustraciones, palabras clave, frases impactantes que representen el problema que les interesa dentro de su ODS. ¿Cómo se ve el problema hoy? ¿Cómo les gustaría que se viera en el futuro?</li>
+                        <li><strong>Tecnologías del Futuro (Focus IA/Auto):</strong> ¿Qué tendencias tecnológicas conocen? ¡Enfoquen en <strong>IA Generativa y Automatización!</strong> ¿Cómo se usan ya estas tecnologías? ¿Cómo podrían usarse de formas nuevas y sorprendentes para abordar su ODS? Añadan imágenes de IAs, robots, interfaces futuristas, conceptos de automatización.</li>
+                        <li><strong>¡Prompts! Esta es la clave:</strong> Escriban ideas de <strong>qué le pedirían a una IA Generativa</strong> para explorar soluciones. No tienen que ser prompts perfectos aún, solo ideas iniciales. Ej: <i>'Genera 5 ideas para usar IA para reducir el desperdicio de comida en escuelas (ODS 12)'</i> o <i>'Crea una imagen de una ciudad futurista con transporte público automatizado y sostenible (ODS 11)'</i>. ¡Sean específicos!</li>
+                        <li><strong>Preguntas iniciales:</strong> ¿Qué dudas tienen sobre el futuro de su ODS y la tecnología? ¿Qué necesitan investigar más? Anoten sus preguntas. Ej: <i>'¿Cómo asegurar que la IA sea usada éticamente para [su ODS]?'</i> o <i>'¿Qué habilidades necesitarán las personas en un futuro automatizado relacionado con [su ODS]?'</i></li>
+                    </ul>
+                 </td>
+            </tr>
+            <tr>
+                 <td><strong>PASO 3 (11 minutos):</strong> Tiempo de trabajo en equipo en Miro.</td>
+                 <td class="dialogue">
+                    "¡A llenar ese tablero! ¡Exploren, sean curiosos, añadan mucho contenido variado! Busquen en internet, discutan en equipo, y sobre todo, ¡añadan muchos prompts! No se limiten. Este es su universo de inspiración."
+                    <br><br>
+                    <i>(Circular activamente, animar a los equipos, resolver dudas sobre Miro o la tarea. Recordarles la importancia de los prompts. Fomentar la búsqueda de ejemplos concretos de IA/Automatización ya existentes relacionados con su ODS. Asegurar que todos participen).</i>
+                </td>
+            </tr>
+             <tr>
+                 <td><strong>PASO 4 (1 minuto):</strong> Cierre de la actividad.</td>
+                 <td class="dialogue">
+                    "¡Tiempo! ¡Excelente trabajo inicial, equipos! Han empezado a llenar sus Combinaboards con inspiración futurista. Este tablero será fundamental para las siguientes etapas."
+                    <br><br>
+                    <i>(Entregable Clave: Combinaboard inicial por equipo en Miro con imágenes, palabras clave, tendencias IA/Auto y prompts).</i>
+                 </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 7 -->
+<div id="activity-7" class="activity">
+    <div class="banner" onclick="toggleContent('cierre_sesion1')">
+        <div class="title">🏁 Actividad 7: Cierre y Continuación ⏰ Tiempo: 2 minutos</div>
+        <div class="subtitle">Resumir la sesión y anticipar los próximos pasos del taller.</div>
+    </div>
+    <div id="cierre_sesion1" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1.5 minutos):</strong> Resumen y Próxima Sesión. Proyectar Diapositiva 8.</td>
+                 <td class="dialogue">
+                     "¡Excelente trabajo, equipos! Han empezado a llenar sus Combinaboards con inspiración futurista. Ya tienen una base sólida con su ODS elegido, ideas visuales, conceptos clave y ¡prompts iniciales para interactuar con la IA! Guarden sus tableros, son muy valiosos."
+                     <br><br>
+                    "En la próxima sesión, profundizaremos con <strong>preguntas clave</strong> en nuestros Combinaboards y luego... ¡usaremos el <strong>Mash-Up</strong> para mezclar ideas y crear visiones totalmente nuevas usando IA! Prepárense para la fusión creativa."
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 2 (0.5 minutos):</strong> Despedida.</td>
+                <td class="dialogue">
+                    "¡Sigan pensando en el futuro! ¡Nos vemos en la Sesión 2 para seguir diseñando con IA! ¡Hasta pronto, visionarios!"
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- ------------------------------------------------- Fin Espacio para Actividades --------------------------------------------------------- -->
+
+</div>
+
+</body>
+</html>
